@@ -15,9 +15,7 @@
       "description": "Collection of skills that assist with coding tasks.",
       "category": "development",
       "strict": false,
-      "skills": [
-        "./skills/bump-version"
-      ]
+      "commands": "./commands"
     }
   ]
 }
