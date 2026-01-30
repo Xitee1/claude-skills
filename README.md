@@ -1,10 +1,44 @@
-# My custom claude skills
+# Claude Code Skills
 
-## How to use
-### Variant 1 - Git clone
-1. Make sure `~/.claude/skills` does not exist (currently claude code doesn't auto-generate this).
-2. Clone this repo into `~/.claude` as `skills`: `git clone git@github.com:Xitee1/claude-skills.git ~/.claude/skills`
+A collection of custom [Claude Code](https://claude.com/claude-code) skills for personal use.
 
-### Variant 2 - manual copy
-1. Create the folder `~/.claude/skills`
-2. Copy the individual skill folders you want to use in there
+## Installation
+
+### Clone the entire repo
+
+```bash
+git clone git@github.com:Xitee1/claude-skills.git ~/.claude/skills
+```
+
+### Or copy individual skills
+
+```bash
+mkdir -p ~/.claude/skills
+cp -r bump-version ~/.claude/skills/
+```
+
+Once installed, skills are available in all Claude Code sessions. Invoke them with `/skill-name` or let Claude use them automatically based on context.
+
+## Available Skills
+
+| Skill | Description |
+|-------|-------------|
+| [bump-version](bump-version/SKILL.md) | Bumps the version of the current project (patch, minor, or major) and creates a release branch |
+
+## Adding a New Skill
+
+1. Create a directory named after the skill (lowercase, hyphenated)
+2. Add a `SKILL.md` with YAML frontmatter and instructions:
+
+```yaml
+---
+name: my-skill
+description: When to use this skill and what it does.
+---
+
+Instructions for Claude go here.
+```
+
+3. Optionally add supporting directories: `scripts/`, `references/`, `assets/`
+
+See the [official docs](https://code.claude.com/docs/en/skills) and [Agent Skills spec](https://agentskills.io/specification) for the full format reference.

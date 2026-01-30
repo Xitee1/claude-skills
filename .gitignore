@@ -1,10 +1,10 @@
-# Ignore everything
-*
+# OS
+.DS_Store
+Thumbs.db
 
-# Whitelist skills
-!bump-version/**
-
-
-# Misc
-!.gitignore
-!README.md
+# Editors
+*.swp
+*.swo
+*~
+.idea/
+.vscode/

@@ -1,6 +1,6 @@
 ---
 name: bump-version
-description: Bumps the version of the current project (patch, minor, or major).
+description: Use when bumping or releasing a version. Increments the version of the current project (patch, minor, or major) and creates a release branch.
 argument-hint: [patch|minor|major]
 ---
 
