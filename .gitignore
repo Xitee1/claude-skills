@@ -2,8 +2,14 @@
 *
 
 # Whitelist skills
+!bump-version/
 !bump-version/**
+!marketplace/
+!marketplace/**
 
+# Marketplace files
+!registry.json
+!install.sh
 
 # Misc
 !.gitignore

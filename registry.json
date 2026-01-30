@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0",
+  "repository": "https://github.com/Xitee1/claude-skills",
+  "raw_base_url": "https://raw.githubusercontent.com/Xitee1/claude-skills/main",
+  "skills": [
+    {
+      "name": "bump-version",
+      "description": "Bumps the version of the current project (patch, minor, or major).",
+      "version": "1.0.0",
+      "author": "Xitee1",
+      "tags": ["versioning", "release", "git"],
+      "files": ["SKILL.md"]
+    }
+  ]
+}
