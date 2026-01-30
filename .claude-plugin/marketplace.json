@@ -16,7 +16,7 @@
       "category": "development",
       "strict": false,
       "skills": [
-        "bump-version"
+        "./skills/bump-version"
       ]
     }
   ]
