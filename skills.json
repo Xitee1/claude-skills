@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "repository": "https://github.com/Xitee1/claude-skills",
+  "skills": [
+    {
+      "id": "bump-version",
+      "description": "Bumps the version of the current project (patch, minor, or major).",
+      "argumentHint": "[patch|minor|major]",
+      "category": "versioning"
+    }
+  ]
+}

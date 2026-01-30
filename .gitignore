@@ -2,8 +2,13 @@
 *
 
 # Whitelist skills
+!bump-version/
 !bump-version/**
+!skill-marketplace/
+!skill-marketplace/**
 
+# Marketplace registry
+!skills.json
 
 # Misc
 !.gitignore
