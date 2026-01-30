@@ -1,0 +1,23 @@
+{
+  "name": "xitee-skills",
+  "owner": {
+    "name": "Xitee1",
+    "url": "https://github.com/Xitee1"
+  },
+  "metadata": {
+    "description": "Personal collection of Claude Code skills",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "coding-helper-skills",
+      "source": "./",
+      "description": "Collection of skills that assist with coding tasks.",
+      "category": "development",
+      "strict": false,
+      "skills": [
+        "bump-version"
+      ]
+    }
+  ]
+}
