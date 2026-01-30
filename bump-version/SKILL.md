@@ -13,4 +13,6 @@ Examples:
 
 Then create a branch `release/v<new-version>`, commit with `chore: bump version to <new-version>`, and push.
 
+If there are two or more projects (e.g. frontend and backend), ask which one or if all should be updated.
+Skip projects that use dynamic versioning (e.g. using git tags).
 If no version file is found, ask the user which file to use.
