@@ -12,6 +12,7 @@ Examples:
 - major: 1.2.3 -> 2.0.0
 
 Then create a branch `release/v<new-version>`, commit with `chore: bump version to <new-version>`, and push.
+After successfully pushing, create a pull request if you have access to a supported MCP for the git host.
 
 If there are two or more projects (e.g. frontend and backend), ask which one or if all should be updated.
 Skip projects that use dynamic versioning (e.g. using git tags).
