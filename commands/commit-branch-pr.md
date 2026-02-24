@@ -1,7 +1,6 @@
 ---
 name: commit-branch-pr
 description: Commit the current changes to a new branch and create a PR.
-argument-hint: [patch|minor|major]
 ---
 
 Commit the current changes to a new branch (or use an existing if an existing branch is fitting).

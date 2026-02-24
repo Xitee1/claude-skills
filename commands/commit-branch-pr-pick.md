@@ -1,7 +1,6 @@
 ---
 name: commit-branch-pr-pick
 description: Commit the current changes to a new branch and create a PR. Cherry-picks only the relevant changes into the branch for a clean PR.
-argument-hint: [patch|minor|major]
 ---
 
 Commit the current changes to a new branch (or use an existing if an existing branch is fitting).
