@@ -37,6 +37,10 @@ Verarbeitung in eine gemeinsam genutzte `List<string>`.
   - Betroffen: Frontend-Bootstrap (`useUserStore.initialize` wirft, Fehler+Retry-UI;
     `permissions.global` fails open ohne Rollen).
 
+## Kompatibilitäts-Altlasten & Workarounds
+
+Keine.
+
 ## Designentscheidungen
 
 ### Warum propagieren statt pro Ressource abfangen?
@@ -74,3 +78,24 @@ Ressource. `ConcurrentBag` wäre ebenfalls korrekt, aber unnötig.
 - [ ] Graph nicht erreichbar (z. B. falsche ClientId lokal): Bootstrap zeigt Fehler + Retry statt leerer Rechte.
 
 Fixes #520
+
+
+---
+
+# What section 3 must catch — a real near-miss
+
+A feature PR's first description contained, under "API und Messaging":
+
+> - Neuer additiver Endpunkt `POST /Import/contacts/mode-aware` …
+> - Der bestehende Endpunkt und sein Consumer bleiben vorerst erhalten, damit bereits vorhandene
+>   Nachrichten abgearbeitet werden und alte Frontends während des Rollouts weiter funktionieren.
+
+and a design decision "Warum ein additiver Endpunkt?" built on the assumption that frontend and
+backend roll out non-atomically. In that repo everything on `main` is built and deployed together,
+so the assumption was false: the legacy endpoint, its consumer and a "separate cleanup later" were
+never wanted. The user only caught it because the description mentioned it. The PR was reworked to
+switch the existing endpoint directly and delete the old path.
+
+In the schema this belongs in **Kompatibilitäts-Altlasten & Workarounds**, marked
+`(decided without user input)`, with the assumption spelled out and the direct alternative named —
+so the reviewer can veto it before reading a single line of code.
