@@ -1,6 +1,6 @@
 ---
 name: create-pr
-description: Create a pull request whose description is the review — written for reviewers who will not read the diff. Documents every change as before → after (logic, design, behavior), every decision made in the session incl. rejected alternatives, impact and risks, what is out of scope, how it was verified and what to check manually. Fixed section schema, identical across projects. Always opens the PR as a draft. Use whenever the user asks to create/open/write a PR, pull request or MR, to write or improve a PR description, or when a branch is ready to be handed over for review.
+description: Create a pull request whose description is the review — written for reviewers who will not read the diff. Documents every change as before → after (logic, design, behavior), every decision made in the session incl. rejected alternatives, everything kept for compatibility or worked around (legacy paths, dual endpoints, deferred cleanups), impact and risks, what is out of scope, how it was verified and what to check manually. Fixed section schema, identical across projects. Always opens the PR as a draft. Use whenever the user asks to create/open/write a PR, pull request or MR, to write or improve a PR description, or when a branch is ready to be handed over for review.
 ---
 
 # Create a pull request
@@ -48,6 +48,8 @@ explicitly:
 - parallelism, timeouts, retries, pagination limits
 - API contract (request/response shape, status codes, events, topics), config keys, migrations
 - authorization scope, tenant/organization boundaries, data visibility
+- a new endpoint, route, event, consumer or type **next to** an existing one; old paths kept "for now";
+  anything labelled legacy, deprecated, temporary, fallback, shim, feature flag or "cleanup later"
 - dead code that was actually dead (say why — e.g. "`catch (ServiceException)` never matched, SDK 5.x throws `ODataError`")
 
 ## 2. Collect every decision from the session
@@ -71,11 +73,12 @@ heading set and use it verbatim:
 |---|---------|--------|
 | 1 | `## Why` | `## Warum` |
 | 2 | `## What changes (before → after)` | `## Was sich ändert (Vorher → Nachher)` |
-| 3 | `## Design decisions` | `## Designentscheidungen` |
-| 4 | `## Impact & risks` | `## Auswirkungen & Risiken` |
-| 5 | `## Out of scope` | `## Nicht Teil dieses PRs` |
-| 6 | `## Verification` | `## Verifikation` |
-| 7 | `## Manual check before merge` | `## Manuell prüfen vor Merge` |
+| 3 | `## Compatibility leftovers & workarounds` | `## Kompatibilitäts-Altlasten & Workarounds` |
+| 4 | `## Design decisions` | `## Designentscheidungen` |
+| 5 | `## Impact & risks` | `## Auswirkungen & Risiken` |
+| 6 | `## Out of scope` | `## Nicht Teil dieses PRs` |
+| 7 | `## Verification` | `## Verifikation` |
+| 8 | `## Manual check before merge` | `## Manuell prüfen vor Merge` |
 | – | `Fixes #123` / `Closes #123` / `Refs #123` | same |
 
 ### 1 Why
@@ -96,29 +99,43 @@ Every entry has three parts:
 
 Concrete means: method names, endpoints, HTTP codes, values, defaults. Not "better", "more robust".
 
-### 3 Design decisions
+### 3 Compatibility leftovers & workarounds
+The section reviewers most often need and least often get. List everything that was **kept,
+duplicated or built around** instead of changed:
+
+- old endpoints, routes, events, consumers, fields, flags or types kept "for now" next to new ones
+- parallel old/new code paths, shims, adapters, fallbacks, feature toggles
+- anything labelled legacy, deprecated, temporary, TODO, or "cleanup in a follow-up"
+- workarounds around existing code that the task could have changed directly
+
+For each: what was kept, the assumption that justified it (e.g. "frontend and backend roll out
+non-atomically"), and what the cleanup would be. If the user did not ask for the leftover, mark it
+`(decided without user input)` and name the direct alternative — the user usually wants the thing
+changed, not worked around. `None.` when nothing was kept.
+
+### 4 Design decisions
 One `### Why X instead of Y?` subsection per decision from step 2. Body: the decision, the
 alternatives considered, the reason. Include rejected approaches and user instructions
 ("user asked to keep the existing endpoint"). Mark agent-only decisions `(decided without user input)`.
 
-### 4 Impact & risks
+### 5 Impact & risks
 What people outside the diff must know: breaking changes (API, events, SDKs to regenerate, shared
 libraries → extra reviews), rollout/migration steps, config or infrastructure changes, security and
 authorization implications, changed failure modes (what a user sees when something fails now vs.
 before), performance. State the risk and the mitigation or the accepted trade-off.
 
-### 5 Out of scope
+### 6 Out of scope
 Deliberately excluded, deferred or noticed-but-untouched items, with issue links if they exist.
 Prevents "why didn't you also…" review rounds.
 
-### 6 Verification
+### 7 Verification
 What was actually run, with counts: test suites (`1284/1284`), targeted tests, lint, build,
 `dotnet format` / `npm run lint`, generated-code checks. Only claims that were executed in the
 session. If something was not run, say so.
 
-### 7 Manual check before merge
+### 8 Manual check before merge
 Checklist (`- [ ]`) of what the reviewer should verify by hand — UI flows, error states, edge
-cases the tests cannot cover. Derived from sections 2 and 4.
+cases the tests cannot cover. Derived from sections 2, 3 and 5.
 
 ### Title
 Conventional commit, imperative, lower-case, ≤ 72 chars: `type(scope): summary`, e.g.
@@ -149,7 +166,8 @@ description is worse than none because the reviewer trusts it.
 - [ ] Every change mapped to a before/after entry; anything not reliably in context re-read from the diff
 - [ ] Every session decision listed, agent-only ones marked
 - [ ] Changed failure modes and error → status mappings stated
-- [ ] All seven sections present, in order, verbatim headings; `None.` where empty
+- [ ] Every legacy path, dual endpoint, shim or deferred cleanup listed with its assumption — or `None.`
+- [ ] All eight sections present, in order, verbatim headings; `None.` where empty
 - [ ] Verification lists only what actually ran
 - [ ] Draft approved by the user before `gh pr create`
 - [ ] Created with `--draft`
