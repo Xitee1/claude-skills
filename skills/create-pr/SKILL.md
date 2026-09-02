@@ -25,15 +25,17 @@ and who is affected.
     has no `--hostname` flag.
   - Azure DevOps → the `mcp__azure-devops__*` tools. The description schema below applies unchanged.
 
-## 1. Know the diff — fill context gaps, don't re-read what you just wrote
+## 1. Know the diff — re-read whatever is not reliably in context
 
-If you wrote the code in this session you already know it: the before/after, the callers you
-traced, the decisions. Do **not** re-read the diff for its own sake. Look things up only where your
-context has gaps:
+If you wrote the code in this session and still have it clearly in context — the before/after, the
+callers you traced, the decisions — you do not need to read it again. In every other case, read it.
+When in doubt, read: a wrong description costs more than the tokens. Read at least the affected parts
+when:
 
-- commits on the branch you did not write, or from an earlier session
-- the conversation was compacted and details are gone
+- the branch has commits you did not write, or from an earlier session
+- the conversation was compacted, or is long enough that details may have blurred
 - you never looked at how a change affects its callers or consumers
+- you cannot state before → after for a change concretely from memory
 - you are asked to describe a branch you did not produce → read it fully:
   `git log --oneline origin/<base>..HEAD` and `git diff origin/<base>...HEAD`
 
@@ -52,7 +54,7 @@ explicitly:
 
 From the conversation, list every choice made while producing the branch: the approach taken, the
 alternatives that were discussed or rejected and why, explicit user instructions, trade-offs, things
-deliberately deferred. Only if that is no longer in context (compaction, earlier session) reconstruct
+deliberately deferred. If any of that is not reliably in context (compaction, earlier session) reconstruct
 it from commit messages, issue comments and the diff, and mark such items `(reconstructed)`. Decisions the agent made **without** asking the user are still decisions —
 list them and mark them `(decided without user input)` so the reviewer can veto.
 
@@ -144,7 +146,7 @@ description is worse than none because the reviewer trusts it.
 
 ## Quick checklist
 
-- [ ] Every change mapped to a before/after entry; context gaps (foreign commits, compaction) filled from the diff
+- [ ] Every change mapped to a before/after entry; anything not reliably in context re-read from the diff
 - [ ] Every session decision listed, agent-only ones marked
 - [ ] Changed failure modes and error → status mappings stated
 - [ ] All seven sections present, in order, verbatim headings; `None.` where empty

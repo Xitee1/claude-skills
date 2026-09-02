@@ -8,4 +8,4 @@ It doesn't matter if the branch contains commits from other branches (when the b
 No need to cherry pick.
 Then push the branch and create a pull request (if a MCP for the git host is configured).
 
-For the pull request itself follow the `create-pr` skill of this plugin: fill context gaps from the diff only where needed, write the description in its fixed before → after schema, get the text approved, and always create the PR as a draft.
+For the pull request itself follow the `create-pr` skill of this plugin: re-read from the diff whatever is not reliably in context, write the description in its fixed before → after schema, get the text approved, and always create the PR as a draft.
