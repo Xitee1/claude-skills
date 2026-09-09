@@ -141,10 +141,15 @@ cases the tests cannot cover. Derived from sections 2, 3 and 5.
 Conventional commit, imperative, lower-case, ≤ 72 chars: `type(scope): summary`, e.g.
 `fix(mdatasvc): tolerate stale app role assignments`.
 
-## 4. Show the draft, wait for explicit approval
+## 4. Use direct Draft-PR instructions as approval
 
-Show title + full body to the user and **wait**. An answer to a side question is not approval;
-the user must say the text goes in as is. Offer that the user edits the text themselves.
+When the user directly instructs you to create a Draft PR (e.g. "Erstelle einen Draft-PR" or
+"mach ein draft pr"), that instruction authorizes creation. Complete steps 1–3, then create the
+Draft PR directly without showing a title/body preview or asking for another confirmation.
+Honor an explicit request to preview or approve the text first.
+
+Otherwise, show title + full body to the user and **wait** for explicit approval before creation.
+An answer to a side question is not approval. Offer that the user edits the text themselves.
 
 ## 5. Create — always as draft
 
@@ -169,7 +174,7 @@ description is worse than none because the reviewer trusts it.
 - [ ] Every legacy path, dual endpoint, shim or deferred cleanup listed with its assumption — or `None.`
 - [ ] All eight sections present, in order, verbatim headings; `None.` where empty
 - [ ] Verification lists only what actually ran
-- [ ] Draft approved by the user before `gh pr create`
+- [ ] Creation authorized by a direct Draft-PR instruction, or title/body explicitly approved after preview
 - [ ] Created with `--draft`
 
 See `references/example.md` for a complete filled-in example.
