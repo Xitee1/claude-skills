@@ -1,8 +1,8 @@
-# My custom claude skills
+# My custom AI skills
 
 ## Installation
 ### Add the marketplace
-`/plugin marketplace add git@github.com:Xitee1/claude-skills.git`
+`/plugin marketplace add git@github.com:Xitee1/xitee-skills.git`
 
 ### Install a specific skill (coding-helper-skills as example)
 `/plugin install coding-helper-skills@xitee-skills`
