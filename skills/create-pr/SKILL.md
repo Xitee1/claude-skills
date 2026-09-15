@@ -79,7 +79,15 @@ heading set and use it verbatim:
 | 6 | `## Out of scope` | `## Nicht Teil dieses PRs` |
 | 7 | `## Verification` | `## Verifikation` |
 | 8 | `## Manual check before merge` | `## Manuell prüfen vor Merge` |
-| – | `Fixes #123` / `Closes #123` / `Refs #123` | same |
+| – | `Fixes #123` / `Closes #123` / `Refs #123` | identical — **never translated** |
+
+**The issue reference is English in every language.** GitHub, GHE and Azure DevOps auto-link and
+auto-close only on `Fixes` / `Closes` / `Resolves` (and `Fixed`/`Closed`/`Resolved`). A translated
+keyword — `Behebt #456`, `Schließt #456`, `Löst #456` — renders as plain text: the issue is never
+linked, never closes on merge, and nobody notices until someone audits the backlog. Same rule for
+every other machine-read token in an otherwise German body: the conventional-commit type in the
+title (`fix`, `feat`, `chore`), `Refs`, `BREAKING CHANGE`, `Co-Authored-By`. Only prose and the
+section headings follow the repo's language.
 
 ### 1 Why
 Problem, motivation, link to the issue. Two to five sentences. What was broken or missing, and
@@ -173,6 +181,7 @@ description is worse than none because the reviewer trusts it.
 - [ ] Changed failure modes and error → status mappings stated
 - [ ] Every legacy path, dual endpoint, shim or deferred cleanup listed with its assumption — or `None.`
 - [ ] All eight sections present, in order, verbatim headings; `None.` where empty
+- [ ] Issue reference uses an English keyword (`Fixes #123`) even in a German body
 - [ ] Verification lists only what actually ran
 - [ ] Creation authorized by a direct Draft-PR instruction, or title/body explicitly approved after preview
 - [ ] Created with `--draft`
